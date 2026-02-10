@@ -12,27 +12,25 @@ function App() {
   const [numeromesa, setNumeromesa] = useState(1);
   const [refreshPedidos, setRefreshPedidos] = useState(0);
 
-  useEffect(() => {
-    const fetchCardapio = async () => {
-      try {
-        const response = await getCardapio();
-        console.log('✅ Front-end: "Cardápio recebido!"', response.data);
-        
-        if (response.data.dados) {
-          setCardapio(response.data.dados);
-        } else {
-          setCardapio(response.data);
-        }
-      } catch (err) {
-        console.error('X Front-end: "Erro ao buscar o cardápio"', err);
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    };
+ useEffect(() => {
+  const fetchCardapio = async () => {
+    try {
+      const response = await getCardapio();
+      console.log('✅ Front-end: "Cardápio recebido!"', response.data);
 
-    fetchCardapio();
-  }, []);
+      setCardapio(response.data.cardapio);
+
+    } catch (err) {
+      console.error('X Front-end: "Erro ao buscar o cardápio"', err);
+      setError(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchCardapio();
+}, []);
+
 
   const cardapioFiltrado = useMemo(() => {
     if (!termoBusca.trim()) {
