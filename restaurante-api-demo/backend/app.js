@@ -2,7 +2,7 @@
 // Este arquivo configura o Express, mas NÃO inicia o servidor
 // Isso permite que os testes importem o app sem subir o servidor
 
-const express = require('express');
+const baseURL = import.meta.env.VITE_API_URL || "htttp//localhost:4000/api"
 const cors = require('cors');
 const apiRoutes = require('./src/routes/api.routes');
 

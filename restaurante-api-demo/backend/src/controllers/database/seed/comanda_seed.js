@@ -9,7 +9,7 @@ async function seedComandas(pool) {
     for (const comanda of comandasData) {
       await conn.query(
         "INSERT INTO comandas (mesa, itens, total, status, dataPedido) VALUES (?, ?, ?, ?, ?)",
-        [comanda.mesa, comanda.itens, comanda.total, comanda.status, comanda.dataPedido]
+        [comanda.mesa, JSON.stringify(comanda.itens), comanda.total, comanda.status, comanda.dataPedido]
       );
     }
 
