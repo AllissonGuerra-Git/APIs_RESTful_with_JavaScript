@@ -1,11 +1,11 @@
 // Controlador do Cardápio
 // Este arquivo é como o "Chef de Cozinha" que mostra o menu aos clientes
 
-const db = require('../services/database_connection');
+// CORREÇÃO: Mudamos require para import e adicionamos .js
+import db from '../services/database_connection.js';
 
 // Função que retorna todo o cardápio
-// Quando o cliente pede para ver o menu, essa função é executada
-const listarCardapio = async (req, res) => {
+export const listarCardapio = async (req, res) => {
   try {
     const [rows] = await db.query('SELECT * FROM cardapio');
 
@@ -15,39 +15,11 @@ const listarCardapio = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({sucesso: false, mensagem: 'Erro ao listar cardápio'});
+    res.status(500).json({ sucesso: false, mensagem: 'Erro ao listar cardápio' });
+  }
 };
-};
-// Função que retorna um item específico do cardápio pelo ID
-// Busca um item usando o parâmetro de rota :id
-//const getCardapioItem = (req, res) => {
- // try {
-    // Pega o ID do parâmetro da URL e converte para número
-   // const id = parseInt(req.params.id);
 
-    // Busca o item no array do cardápio
-   // const item = cardapio.find(item => item.id === id);
-
-    // Se o item não foi encontrado, retorna 404
-    //if (!item) {
-      //return res.status(404).json({
-     //   message: 'Item não encontrado'
-    //  });
-   // }
-
-    // Se encontrou, retorna o item
-   // res.status(200).json(item);
- // } catch (error) {
-    // Se algo der errado, retorna erro 500
-   // res.status(500).json({
-      //sucesso: false,
-     // mensagem: 'Erro ao buscar item do cardápio',
-    //  erro: error.message
-    //});
- // }
-//};
-
-// Exporta as funções para serem usadas nas rotas
-module.exports = {
+// Exporta as funções para serem usadas nas rotas (Padrão ES Modules)
+export default {
   listarCardapio
 };

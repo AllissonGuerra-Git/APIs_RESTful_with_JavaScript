@@ -1,21 +1,13 @@
 {
   "name": "restaurante-api-backend",
   "version": "1.0.0",
-  "description": "API RESTful didática para simular operações de um restaurante",
+  "type": "module",
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
     "test": "jest --watchAll --verbose"
   },
-  "keywords": [
-    "api",
-    "rest",
-    "restaurante",
-    "didático"
-  ],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "cors": "^2.8.6",
     "dotenv": "^17.2.4",
@@ -26,6 +18,5 @@
     "jest": "^30.2.0",
     "nodemon": "^3.0.1",
     "supertest": "^7.1.4"
-  },
-  "type": "commonjs"
-}
+  }
+} 

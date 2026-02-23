@@ -1,8 +1,8 @@
-// db.js
-const mysql = require("mysql2/promise");
-require('dotenv').config();
+// Mudamos require para import (o padrão moderno que o seu projeto agora exige)
+import mysql from "mysql2/promise";
+import 'dotenv/config'; 
 
-console.log(process.env.DB_HOST, process.env.DB_PASSWORD, process.env.DB_USER)
+console.log(process.env.DB_HOST, process.env.DB_PASSWORD, process.env.DB_USER);
 
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
@@ -14,8 +14,7 @@ const pool = mysql.createPool({
     minVersion: 'TLSv1.2',
     rejectUnauthorized: true
   }
-
 });
 
-module.exports = pool;
-
+// A mudança crucial: trocamos module.exports por export default
+export default pool;

@@ -1,8 +1,5 @@
-// Servidor Principal - Coração do Back-end
-// Este arquivo apenas INICIA o servidor
-// A configuração do Express está em app.js (para permitir testes)
-
-const app = require('./app');
+// server.js
+import app from './app.js'; // Mudamos de require para import + extensão .js
 
 // Define a porta do servidor
 const PORT = 4000;

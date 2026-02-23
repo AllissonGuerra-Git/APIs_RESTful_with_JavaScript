@@ -1,10 +1,11 @@
 // Controlador de Comandas (Pedidos)
 // Este arquivo é como o "Chef de Pedidos" que recebe e gerencia os pedidos dos clientes
 
-const { comandas } = require('../services/database_mock.js');
-
+// CORREÇÃO 1: Mudamos require para import e adicionamos .js no final
+// O ponto final (.) indica que o arquivo está na mesma pasta/subpasta
+import { comandas } from './database/mock/comandas.mock.js';
 // Função que retorna todas as comandas (pedidos) registradas
-const getComandas = (req, res) => {
+export const getComandas = (req, res) => { // Adicionamos 'export' antes de const
   try {
     res.status(200).json({
       sucesso: true,
@@ -22,17 +23,12 @@ const getComandas = (req, res) => {
 };
 
 // Função que cria uma nova comanda (pedido)
-// Recebe os dados do pedido do cliente via req.body
-const createComanda = (req, res) => {
+export const createComanda = (req, res) => {
   try {
-    // Extrai os dados enviados pelo cliente
     const { mesa, itens, total } = req.body;
 
-    // total = total * 1.10;
-
-    // Cria um novo objeto de comanda
     const novaComanda = {
-      id: comandas.length + 1, // ID automático baseado no tamanho do array
+      id: comandas.length + 1,
       mesa,
       itens,
       total,
@@ -40,10 +36,8 @@ const createComanda = (req, res) => {
       dataPedido: new Date().toISOString()
     };
 
-    // Adiciona a nova comanda ao array
     comandas.push(novaComanda);
 
-    // Retorna a comanda criada com status 201 (Created)
     res.status(201).json({
       sucesso: true,
       mensagem: 'Comanda criada com sucesso',
@@ -59,13 +53,11 @@ const createComanda = (req, res) => {
 };
 
 // Função para atualizar o status de uma comanda (PATCH)
-// Permite mudar o status de um pedido (ex: pendente → Em Preparo → Pronto)
-const updateComandaStatus = (req, res) => {
+export const updateComandaStatus = (req, res) => {
   try {
-    const { id } = req.params; // Pega o ID da URL
-    const { status } = req.body; // Pega o novo status do corpo da requisição
+    const { id } = req.params;
+    const { status } = req.body;
 
-    // Validação: verifica se o status foi enviado
     if (!status) {
       return res.status(400).json({
         sucesso: false,
@@ -73,11 +65,8 @@ const updateComandaStatus = (req, res) => {
       });
     }
 
-    // Encontra o índice da comanda no array
-    // Usamos == (comparação fraca) para permitir '1' == 1
     const comandaIndex = comandas.findIndex(c => c.id == id);
 
-    // Se não encontrar (índice -1), retorna 404
     if (comandaIndex === -1) {
       return res.status(404).json({
         sucesso: false,
@@ -85,10 +74,7 @@ const updateComandaStatus = (req, res) => {
       });
     }
 
-    // Atualiza o status da comanda encontrada
     comandas[comandaIndex].status = status;
-
-    // Retorna a comanda inteira atualizada com status 200 (OK)
     return res.status(200).json(comandas[comandaIndex]);
 
   } catch (error) {
@@ -101,16 +87,11 @@ const updateComandaStatus = (req, res) => {
 };
 
 // Função para deletar uma comanda (DELETE)
-// Remove um pedido do sistema (ex: cancelamento, limpeza de pedidos antigos)
-const deleteComanda = (req, res) => {
+export const deleteComanda = (req, res) => {
   try {
-    const { id } = req.params; // Pega o ID da URL
-
-    // Encontra o índice da comanda no array
-    // Usamos == (comparação fraca) para permitir '1' == 1
+    const { id } = req.params;
     const comandaIndex = comandas.findIndex(c => c.id == id);
 
-    // Se não encontrar (índice -1), retorna 404
     if (comandaIndex === -1) {
       return res.status(404).json({
         sucesso: false,
@@ -118,11 +99,8 @@ const deleteComanda = (req, res) => {
       });
     }
 
-    // Remove a comanda do array usando splice
-    // splice(índice, quantosRemover) - remove 1 elemento no índice encontrado
     comandas.splice(comandaIndex, 1);
 
-    // Retorna sucesso com status 200 (OK)
     return res.status(200).json({
       sucesso: true,
       mensagem: 'Comanda deletada com sucesso'
@@ -137,8 +115,8 @@ const deleteComanda = (req, res) => {
   }
 };
 
-// Exporta as funções para serem usadas nas rotas
-module.exports = {
+// CORREÇÃO 2: Exportação final no formato ES Module
+export default {
   getComandas,
   createComanda,
   updateComandaStatus,
