@@ -15,6 +15,7 @@ export const getCardapio = () => {
 
 // Função para buscar um item específico do cardápio (por ID)
 export const getCardapioItem = (id) => {
+  
   console.log(`🍽️ Front-end: "Garçom, me traga informações sobre o item ${id}!"`);
   return api.get(`/cardapio/${id}`);
 };
