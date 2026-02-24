@@ -1,4 +1,4 @@
-const { cardapio } = require("../mock/cardapio_mock"); // ajuste o caminho conforme sua pasta
+const { cardapio } = require("../mock/cardapio_mock.cjs"); // ajuste o caminho conforme sua pasta
 
 async function seedCardapio(pool) {
   console.log("Populando cardapio...");

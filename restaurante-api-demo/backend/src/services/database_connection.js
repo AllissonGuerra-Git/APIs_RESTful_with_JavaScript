@@ -1,8 +1,8 @@
-// Mudamos require para import (o padrão moderno que o seu projeto agora exige)
 import mysql from "mysql2/promise";
 import 'dotenv/config'; 
 
-console.log(process.env.DB_HOST, process.env.DB_PASSWORD, process.env.DB_USER);
+// Log para conferir se as variáveis estão carregando no terminal
+console.log("Conectando ao host:", process.env.DB_HOST);
 
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
@@ -16,5 +16,4 @@ const pool = mysql.createPool({
   }
 });
 
-// A mudança crucial: trocamos module.exports por export default
-export default pool;
+export default pool; // O 'require' do seed vai buscar esse carinha aqui

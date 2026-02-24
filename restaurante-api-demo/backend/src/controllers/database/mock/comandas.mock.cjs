@@ -25,4 +25,4 @@ const comandas = [
   }
 ];
 
-export { comandas };
+module.exports = { comandas };
