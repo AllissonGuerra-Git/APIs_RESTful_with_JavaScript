@@ -3,7 +3,7 @@
 
 // CORREÇÃO 1: Mudamos require para import e adicionamos .js no final
 // O ponto final (.) indica que o arquivo está na mesma pasta/subpasta
-import { comandas } from './database/mock/comandas.mock.js';
+import { comandas } from "./database/mock/comandas.mock.cjs";
 // Função que retorna todas as comandas (pedidos) registradas
 export const getComandas = (req, res) => { // Adicionamos 'export' antes de const
   try {

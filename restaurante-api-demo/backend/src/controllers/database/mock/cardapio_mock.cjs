@@ -26,6 +26,4 @@ const cardapio = [
 ];
 
 // Exportamos os arrays e a função de reset para serem usados em outros arquivos
-module.exports = {
-  cardapio
-};
+module.exports = { cardapio };
